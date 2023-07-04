@@ -15,13 +15,17 @@ public class Customer {
     @Column(name = "CustomerLocation")
     String location;
 
-    public Customer(int id, String name, String location) {
+    @OneToOne(cascade = CascadeType.ALL)
+    Cart cart;
+
+    public Customer() {
+    }
+
+    public Customer(int id, String name, String location, Cart cart) {
         this.id = id;
         this.name = name;
         this.location = location;
-    }
-
-    public Customer() {
+        this.cart = cart;
     }
 
     public int getId() {
@@ -48,12 +52,11 @@ public class Customer {
         this.location = location;
     }
 
-    @Override
-    public String toString() {
-        return "Customer{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", location='" + location + '\'' +
-                '}';
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }
