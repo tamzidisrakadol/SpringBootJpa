@@ -1,5 +1,6 @@
 package com.example.springbootjpa.Modal;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +17,7 @@ public class Customer {
     String location;
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JsonManagedReference
     Cart cart;
 
     public Customer() {

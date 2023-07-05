@@ -5,6 +5,8 @@ import com.example.springbootjpa.Repo.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class CustomerService {
     @Autowired
@@ -14,6 +16,11 @@ public class CustomerService {
     public Customer addCustomer(Customer customer){
         customerRepo.save(customer);
         return customer;
+    }
+
+    //read-all
+    public List<Customer> getAllBook(){
+        return (List<Customer>) customerRepo.findAll();
     }
 
 }

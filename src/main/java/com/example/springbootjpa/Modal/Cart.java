@@ -1,5 +1,6 @@
 package com.example.springbootjpa.Modal;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GeneratorType;
 
@@ -15,12 +16,17 @@ public class Cart {
     @Column(name = "customer_cart_amount")
     int cartAmount;
 
-    public Cart(int id, int cartAmount) {
-        this.id = id;
-        this.cartAmount = cartAmount;
-    }
+    @OneToOne(mappedBy = "cart")
+    @JsonBackReference
+    Customer customer;
 
     public Cart() {
+    }
+
+    public Cart(int id, int cartAmount, Customer customer) {
+        this.id = id;
+        this.cartAmount = cartAmount;
+        this.customer = customer;
     }
 
     public int getId() {
@@ -39,5 +45,20 @@ public class Cart {
         this.cartAmount = cartAmount;
     }
 
+    public Customer getCustomer() {
+        return customer;
+    }
 
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", cartAmount=" + cartAmount +
+                ", customer=" + customer +
+                '}';
+    }
 }
